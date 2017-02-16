@@ -19,11 +19,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::resource('prueba','PruebaController');
 
-Route::group(['middleware' => 'jwt.auth'], function() {
+Route::group(['middleware' => 'api'], function() {
 	Route::post('login', 'LoginController@login');
-	
+	Route::post('forgot_password', 'PasswordController@forgotPassword');
+	Route::get('confirmacion', 'UsuarioController@confirmacion');
 	Route::group(['middleware' => 'jwt.auth'], function() {
 		Route::get('logout', 'LoginController@logout');
+		Route::resource('usuarios', 'UsuarioController');
 	});
 });
 

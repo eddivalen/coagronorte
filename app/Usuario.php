@@ -29,4 +29,7 @@ class Usuario extends Authenticatable
     	return $this->belongsToMany('App\Plantilla','detalle_plantilla','cedula','codigo')->using('App\DetallePlantilla')
             ->withPivot('cumplimiento','fecha_inicio');
     }
+    public function setPasswordAttribute($password) {
+    	$this->attributes['password'] = bcrypt($password);
+    }
 }
