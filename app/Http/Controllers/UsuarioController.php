@@ -11,7 +11,7 @@ use App\Http\Requests\ConfirmacionRequest;
 //use Illuminate\Support\Facades\Validator;
 use App\Usuario;
 
-use App\Jobs\EnviarCorreoConfirmacionDeCuenta;
+use App\Jobs\EnviarConfirmacionDeCuenta;
 use App\Jobs\EnviarCorreoForgotPassword;
 
 use JWTAuth, Validator;
@@ -33,13 +33,9 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(CreateUsuarioRequest $request)
+    public function create()
     {
-        $usuario = new Usuario($request->input());
-        $usuario->save();
-        // Enviar correo para confirmar cuenta
-        $this->dispatch(new EnviarCorreoConfirmacionDeCuenta($usuario));
-        return response()->json(['ok'=>'Usuario creado, validar correo'],200);
+       
     }
 
     /**
@@ -48,9 +44,14 @@ class UsuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateUsuarioRequest $request)
     {
-        //
+        echo "prueba";
+       $usuario = new Usuario($request->input());
+        $usuario->save();
+        // Enviar correo para confirmar cuenta
+        //$this->dispatch(new EnviarConfirmacionDeCuenta($usuario));
+        return response()->json(['ok'=>'Usuario creado, validar correo'],200);
     }
 
     /**

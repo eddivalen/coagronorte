@@ -12,6 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return 'Versión web del api';
 });
 Route::get('validar-correo',['as' => 'validarCorreo', 'uses'=>'UsuarioController@validarCorreo']);
+
+// Envía la vista para reestablecer contraseña
+Route::get('reestablecer-contrasena',function (){
+	return 'vista con formulario de reestablecer contraseña';
+});
+// Recibe lo enviado por post para validar la contraseña
+Route::post('reestablecer-contrasena',['as' => 'reestablecerContrasena', 'uses'=>'PasswordController@reestablecerContrasena']);

@@ -8,18 +8,24 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
+use App\Usuario;
+
+use Mail, Uuid;
 class EnviarCorreoForgotPassword implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-    protected $correoElectronico,
+    protected $correoElectronico;
+    protected $usuario;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($correoElectronico)
     {
         $this->correoElectronico = $correoElectronico;
+        // Obtener usuario de la DB
+        $this->usuario = Usuario::where('correo_electronico', $this->correoElectronico)->first();
     }
 
     /**
@@ -29,6 +35,20 @@ class EnviarCorreoForgotPassword implements ShouldQueue
      */
     public function handle()
     {
-        //
+         // Genero token único de validación
+        $token = Uuid::uuid4()->toString();
+
+        // Creo el url de reestablecer contraseña
+        $url = url('reestablecer-contrasena').'?token='.$token;
+
+        // Guardo el token generado en la DB
+        $this->usuario->reset_password_token = $token;
+        $this->usuario->save();
+
+        // Envio el correo
+        Mail::send('reestablecer-contrasena', compact('url'), function($mail){
+            $mail->to($this->correoElectronico)
+                ->subject('Reestablecer contraseña');
+        });
     }
 }

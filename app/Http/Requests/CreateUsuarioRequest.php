@@ -30,7 +30,6 @@ class CreateUsuarioRequest extends FormRequest
             'nombre' => 'required|string|max:50',
             'apellido' => 'required|string|max:50',
             'telefono' => 'required|string|max:50',
-            'direccion' => 'required',
             'fecha_inscripcion'=> 'date',
         ];
     }
