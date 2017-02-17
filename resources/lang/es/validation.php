@@ -95,13 +95,17 @@ return [
     */
 
     'custom' => [
-         'correo_electronico' => [
-+            'required' => 'El correo electrónico es requerido',
-+            'exists' => 'El correo electrónico no existe en la base de datos',
-+        ],
-+        'password' => [
-+            'required' => 'La contraseña es requerida',
-+        ],
+        'correo_electronico' => [
+            'required'         => 'El correo electrónico es requerido',
+            'exists'           => 'El correo electrónico no existe en la base de datos',
+            'usuario_validado' => 'El usuario no ha sido validado',
+        ],
+        'password' => [
+            'required' => 'La contraseña es requerida',
+        ],
+        'token' => [
+            'required' => 'El token es requerido',
+        ],
     ],
 
     /*

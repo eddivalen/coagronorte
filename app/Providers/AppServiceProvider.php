@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Validator;
+use App\Usuario;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Validator::extend('usuario_validado', function($attribute, $value, $parameters, $validator) {
+            $usuario = Usuario::where('correo_electronico',$value)->first();
+            return ( !is_null($usuario) && $usuario->confirmacion == 1 );
+       });
+        Validator::extend('usuario_no_validado', function($attribute, $value, $parameters, $validator) {
+            $usuario = Usuario::where('correo_electronico',$value)->first();
+            return ( !is_null($usuario) && $usuario->confirmacion == 0 );
+       });
     }
 
     /**

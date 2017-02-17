@@ -14,3 +14,4 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('validar-correo',['as' => 'validarCorreo', 'uses'=>'UsuarioController@validarCorreo']);

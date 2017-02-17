@@ -29,7 +29,20 @@ class Usuario extends Authenticatable
     	return $this->belongsToMany('App\Plantilla','detalle_plantilla','cedula','codigo')->using('App\DetallePlantilla')
             ->withPivot('cumplimiento','fecha_inicio');
     }
+
+    /**
+     * Permite encriptar automaticamente la contraseña al guardar masivamente
+     * @param String $password 
+     */
     public function setPasswordAttribute($password) {
+    	
     	$this->attributes['password'] = bcrypt($password);
+    }
+     /**
+     * Permite almacenar el token de confirmación de correo electrónico
+     * @param String $token token UUID4
+     */
+    public function setConfirmationTokenAttribute($token) {
+        $this->attributes['confirmation_token'] = $token;
     }
 }

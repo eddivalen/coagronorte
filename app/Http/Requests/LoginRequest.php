@@ -26,7 +26,7 @@ class LoginRequest extends Request
     public function rules()
     {
         return [
-            'correo_electronico' => 'required|exists:usuarios,correo_electronico',
+            'correo_electronico' => 'required|exists:usuarios,correo_electronico|usuario_validado',
             'password'           => 'required'
         ];
     }

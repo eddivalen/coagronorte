@@ -8,11 +8,11 @@ use App\Http\Requests;
 use App\Http\Requests\CreateUsuarioRequest;
 use App\Http\Requests\ForgotPasswordRequest;
 use App\Http\Requests\ConfirmacionRequest;
-
+//use Illuminate\Support\Facades\Validator;
 use App\Usuario;
 
-//use App\Jobs\EnviarCorreoConfirmacionDeCuenta;
-//use App\Jobs\EnviarCorreoForgotPassword;
+use App\Jobs\EnviarCorreoConfirmacionDeCuenta;
+use App\Jobs\EnviarCorreoForgotPassword;
 
 use JWTAuth, Validator;
 
@@ -97,7 +97,7 @@ class UsuarioController extends Controller
     {
         //
     }
-   /* public function validarCorreo(Request $request){
+   public function validarCorreo(Request $request){
         $validator = Validator::make($request->input(),[
             'email' => 'required|exists:usuario,correo_electronico|usuario_no_validado',
             'token' => 'required'
@@ -120,9 +120,6 @@ class UsuarioController extends Controller
         $usuario->save();
 
         return 'usuario validado';
-    } */  
-     public function confirmacion(Request $request) {
-        // TODO
-         return response()->json(['ok' => 'usuario confirmado'], 200);
-    }
+    }  
+    
 }
