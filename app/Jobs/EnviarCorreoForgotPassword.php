@@ -7,7 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-
+use App\Mail\SendForgotEmail;
 use App\Usuario;
 
 use Mail, Uuid;
@@ -45,10 +45,11 @@ class EnviarCorreoForgotPassword implements ShouldQueue
         $this->usuario->reset_password_token = $token;
         $this->usuario->save();
 
+        Mail::to($this->correoElectronico)->send(new SendForgotEmail);
         // Envio el correo
-        Mail::send('reestablecer-contrasena', compact('url'), function($mail){
+       /* Mail::send('reestablecer-contrasena', compact('url'), function($mail){
             $mail->to($this->correoElectronico)
                 ->subject('Reestablecer contraseña');
-        });
+        });*/
     }
 }

@@ -50,7 +50,7 @@ class UsuarioController extends Controller
        $usuario = new Usuario($request->input());
         $usuario->save();
         // Enviar correo para confirmar cuenta
-        //$this->dispatch(new EnviarConfirmacionDeCuenta($usuario));
+        $this->dispatch(new EnviarConfirmacionDeCuenta($usuario));
         return response()->json(['ok'=>'Usuario creado, validar correo'],200);
     }
 
@@ -100,7 +100,7 @@ class UsuarioController extends Controller
     }
    public function validarCorreo(Request $request){
         $validator = Validator::make($request->input(),[
-            'email' => 'required|exists:usuario,correo_electronico|usuario_no_validado',
+            'email' => 'required|exists:usuarios,correo_electronico|usuario_no_validado',
             'token' => 'required'
             ]);
          if ($validator->fails()) {

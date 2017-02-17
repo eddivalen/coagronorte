@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use App\Usuario;
 use Uuid, Mail;
+use App\Mail\SendConfirmationAccount;
 class EnviarConfirmacionDeCuenta implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
@@ -40,12 +41,12 @@ class EnviarConfirmacionDeCuenta implements ShouldQueue
         // Guardo el token en confirmation_token del usuario
         $this->usuario->confirmation_token = $token;
         $this->usuario->save();
-
+        Mail::to($this->usuario->correo_electronico)->send(new SendConfirmationAccount($url));
         // Envio el correo
-        Mail::send('verificacion-cuenta', compact(url), function($mail){
+       /* Mail::send('verificacion-cuenta', compact(url), function($mail){
             $mail->to($usuario->correo_electronico)
                 ->subject('Verificación de correo electrónico');
-        });
+        });*/
 
     }
 }

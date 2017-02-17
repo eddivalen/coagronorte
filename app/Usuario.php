@@ -17,7 +17,7 @@ class Usuario extends Authenticatable
 	protected $hidden     = ['password'];
 
 
-	protected $fillable   = ['cedula','nombre_usuario','password','correo_electronico','telefono','fecha_inscripcion','codigo_tipo_usuario'];
+	protected $fillable   = ['cedula','nombre_usuario','nombre','apellido','password','correo_electronico','telefono','fecha_inscripcion','codigo_tipo_usuario'];
 
 	public function detalle_implemento(){
 		return $this->belongsTo(App\DetalleImplemento::class, 'cedula','cedula_usuarios');
