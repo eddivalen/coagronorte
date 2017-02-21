@@ -23,14 +23,16 @@ class ResetPasswordRequest extends FormRequest
      */
     public function rules()
     {
+       // var_dump($this->request);
         return [
-             'reset_password_token' => 'required|exists:usuarios,reset_password_token',
-             'password'             => 'required|confirmed',
-             '_token'               => 'required',
+            'reset_password_token'  => 'required|exists:usuarios,reset_password_token',
+             'correo_electronico'    => 'required|exists:usuarios,correo_electronico',
+             'password'              => 'required|confirmed',
         ];
 
     }
     public function response(array $errors) {
+       // var_dump($errors);
         return 'Error de request';
     }
 }

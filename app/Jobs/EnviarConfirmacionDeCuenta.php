@@ -41,12 +41,7 @@ class EnviarConfirmacionDeCuenta implements ShouldQueue
         // Guardo el token en confirmation_token del usuario
         $this->usuario->confirmation_token = $token;
         $this->usuario->save();
-        Mail::to($this->usuario->correo_electronico)->send(new SendConfirmationAccount($url));
         // Envio el correo
-       /* Mail::send('verificacion-cuenta', compact(url), function($mail){
-            $mail->to($usuario->correo_electronico)
-                ->subject('Verificación de correo electrónico');
-        });*/
-
+        Mail::to($this->usuario->correo_electronico)->send(new SendConfirmationAccount($url)); 
     }
 }

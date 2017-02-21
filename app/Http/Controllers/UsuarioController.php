@@ -46,7 +46,6 @@ class UsuarioController extends Controller
      */
     public function store(CreateUsuarioRequest $request)
     {
-        echo "prueba";
        $usuario = new Usuario($request->input());
         $usuario->save();
         // Enviar correo para confirmar cuenta
@@ -98,29 +97,6 @@ class UsuarioController extends Controller
     {
         //
     }
-   public function validarCorreo(Request $request){
-        $validator = Validator::make($request->input(),[
-            'email' => 'required|exists:usuarios,correo_electronico|usuario_no_validado',
-            'token' => 'required'
-            ]);
-         if ($validator->fails()) {
-            return 'validación incorrecta por lo enviado en el get';
-        }
-        $correo_electronico = $request->email;
-        $token = $request->token;
-        if (is_null($usuario = Usuario::where([
-            ['correo_electronico', $correo_electronico],
-            ['confirmation_token',$token]])
-            ->first())
-        ) {
-            return 'validación incorrecta, no coindicen los datos';
-        }
-        $usuario->confirmation_token = null;
-        $usuario->confirmacion = 1;
-
-        $usuario->save();
-
-        return 'usuario validado';
-    }  
+  
     
 }

@@ -36,20 +36,15 @@ class EnviarCorreoForgotPassword implements ShouldQueue
     public function handle()
     {
          // Genero token único de validación
-        $token = Uuid::uuid4()->toString();
+        $reset_password_token = Uuid::uuid4()->toString();
 
         // Creo el url de reestablecer contraseña
-        $url = url('reestablecer-contrasena').'?token='.$token;
+        $url = url('/passwords/reset').'?reset_password_token='.$reset_password_token;
 
         // Guardo el token generado en la DB
-        $this->usuario->reset_password_token = $token;
+        $this->usuario->reset_password_token = $reset_password_token;
         $this->usuario->save();
-
-        Mail::to($this->correoElectronico)->send(new SendForgotEmail);
-        // Envio el correo
-       /* Mail::send('reestablecer-contrasena', compact('url'), function($mail){
-            $mail->to($this->correoElectronico)
-                ->subject('Reestablecer contraseña');
-        });*/
+         // Envio el correo
+        Mail::to($this->correoElectronico)->send(new SendForgotEmail ($url));
     }
 }

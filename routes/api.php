@@ -22,7 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Route::resource('prueba','PruebaController');
 Route::post('crear-usuario','UsuarioController@store');
 Route::post('login', 'LoginController@login');
-Route::post('forgot_password', 'PasswordController@forgotPassword');
+//Route::post('forgot_password', 'PasswordController@forgotPassword');
 
 	
 	Route::group(['middleware' => 'jwt.auth'], function() {

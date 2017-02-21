@@ -16,9 +16,24 @@ Route::get('/', function () {
 });
 Route::get('validar-correo',['as' => 'validarCorreo', 'uses'=>'UsuarioController@validarCorreo']);
 
+Route::get('/passwords/reset','PasswordController@resetView');
+//Route::post('/passwords/reset', 'PasswordController@reestablecerContrasena');
+
+Route::post('/passwords/reseted','PasswordController@reestablecerContrasena');
+
+
+
+
+Route::get('forgot_password', 'PasswordController@forgotPassword');
+Route::post('forgot_password', 'PasswordController@forgotPassword');
+
+Route::get('/passwords/sended', 'PasswordController@sendedView');
+Route::post('/passwords/sended', 'PasswordController@forgotPassword');
+
 // Envía la vista para reestablecer contraseña
-Route::get('reestablecer-contrasena',function (){
-	return 'vista con formulario de reestablecer contraseña';
-});
+Route::get('reestablecer-contrasena', 'PasswordController@reestablecerView');
 // Recibe lo enviado por post para validar la contraseña
-Route::post('reestablecer-contrasena',['as' => 'reestablecerContrasena', 'uses'=>'PasswordController@reestablecerContrasena']);
+Route::post('reestablecer-contrasena',['as' => 'reestablecerContrasena', 'uses'=>'PasswordController@forgotPassword']);
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

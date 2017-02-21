@@ -1,12 +1,14 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 use Illuminate\Http\Request;
 use App\Http\Requests\ForgotPasswordRequest;
 use App\Http\Requests;
-
+use App\Http\Controllers\Controller;
 use App\Jobs\EnviarCorreoForgotPassword;
 use App\Usuario;
 use App\Http\Requests\ResetPasswordRequest;
+
+use Debugbar;
 class PasswordController extends Controller
 {
 	/**
@@ -19,7 +21,7 @@ class PasswordController extends Controller
         // Despacha el trabajo que enviará el correo electrónico a quien olvido la contraseña
         $this->dispatch(new EnviarCorreoForgotPassword($request->correo_electronico));
         
-        return response()->json(['ok' => 'correo electronico enviado'], 200);
+        return view('auth.passwords.sended');
     }
     /**
      * Recibe los campos del formulario de cambio de contraseña
@@ -28,13 +30,23 @@ class PasswordController extends Controller
      * @return View                                 vista de confirmación
      */
     public function reestablecerContrasena(ResetPasswordRequest $request) {
-
 		$usuario = Usuario::where('reset_password_token',$request->reset_password_token)->first();
 		$usuario->password             = $request->password;
 		$usuario->reset_password_token = null;
 		$usuario->save();
 
-    	return 'contraseña cambiada';
+    	return view('auth.passwords.reseted');
     }
-    
+    public function reestablecerView()
+    {
+    	return view('auth.passwords.email');
+    }
+    public function sendedView()
+    {
+    	return view('auth.passwords.sended');
+    }
+    public function resetView()
+    {
+        return view('auth.passwords.reset');
+    }
 }
