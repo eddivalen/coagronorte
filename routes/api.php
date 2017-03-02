@@ -39,6 +39,9 @@ Route::post('login', 'LoginController@login');
 		Route::resource('implemento','ImplementoController', ['only' => [
 		'index', 'show', 'store', 'update', 'destroy'
 		]]);
+		Route::resource('unidad','UnidadController', ['only' => [
+		'index', 'show', 'store', 'update', 'destroy'
+		]]);
 		Route::get('logout', 'LoginController@logout');
 		Route::resource('usuarios', 'UsuarioController');
 	});
