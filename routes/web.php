@@ -34,6 +34,6 @@ Route::post('/passwords/sended', 'PasswordController@forgotPassword');
 Route::get('reestablecer-contrasena', 'PasswordController@reestablecerView');
 // Recibe lo enviado por post para validar la contraseña
 Route::post('reestablecer-contrasena',['as' => 'reestablecerContrasena', 'uses'=>'PasswordController@forgotPassword']);
-Auth::routes();
+//Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+//Route::get('/home', 'HomeController@index');
