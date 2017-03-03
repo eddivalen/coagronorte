@@ -13,7 +13,7 @@ class Implemento extends Model
 
 	public function detalles_implementos()
     {
-        return $this->hasMany(App\DetalleImplemento::class,'codigo_implementos','cod');
+        return $this->hasMany(DetalleImplemento::class,'codigo_implementos','cod');
     }
 
 }

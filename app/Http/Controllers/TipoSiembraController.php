@@ -38,7 +38,10 @@ class TipoSiembraController extends Controller
     public function store(CreateTipoSiembraRequest $request)
     {
        $tiposiembra = TipoSiembra::create($request->input());
-       return response()->json(['ok'=>'TipoSiembra creada','tiposiembra'=>$tiposiembra],200);
+       return response()->json([
+        'ok'          => 'TipoSiembra creada',
+        'tiposiembra' => $tiposiembra
+        ],201);
     }
 
     /**
@@ -77,7 +80,10 @@ class TipoSiembraController extends Controller
 
         $tiposiembra->update($request->input());
 
-        return response()->json(['ok' => 'actualizado','tiposiembra'=>$tiposiembra], 200);
+        return response()->json([
+            'ok'          => 'actualizado',
+            'tiposiembra' => $tiposiembra
+            ], 200);
     
     }
 
@@ -89,12 +95,10 @@ class TipoSiembraController extends Controller
      */
     public function destroy($id)
     {
-        
         $tiposiembra = TipoSiembra::findOrFail($id);
         
         $tiposiembra->delete();
 
         return response()->json(['ok'=>'deleted'],200);
-    
     }
 }

@@ -38,7 +38,10 @@ class ImplementoController extends Controller
     public function store(CreateImplementoRequest $request)
     {
        $implemento = Implemento::create($request->input());
-       return response()->json(['ok'=>'Implemento creado','implemento'=>$implemento],200);
+       return response()->json([
+        'ok'         => 'Implemento creado',
+        'implemento' => $implemento
+        ],201);
     
     }
 
@@ -77,7 +80,10 @@ class ImplementoController extends Controller
 
         $implemento->update($request->input());
 
-        return response()->json(['ok' => 'Actualizado','implemento'=>$implemento], 200);
+        return response()->json([
+            'ok'         => 'Actualizado',
+            'implemento' => $implemento
+            ], 200);
     }
 
     /**

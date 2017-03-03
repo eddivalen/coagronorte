@@ -12,6 +12,6 @@ class EstadoSiembra extends Model
 	protected $fillable   = ['numero','archivo','descripcion','fecha','duracion','tamano','tipo','codigo_visitas']; 
 
 	public function visita(){
-		return $this->belongsTo(App\Visita::class, 'codigo_visitas','codigo');
+		return $this->belongsTo(Visita::class, 'codigo_visitas','codigo');
 	}
 }

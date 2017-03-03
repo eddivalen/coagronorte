@@ -12,11 +12,11 @@ class DetalleImplementos extends Model
 	protected $fillable   = ['codigo','codigo_implementos','cedula_usuarios','cantidad'];
 
 	public function implemento(){
-		return $this->belongsTo(App\Implemento::class, 'codigo_implementos','cod');
+		return $this->belongsTo(Implemento::class, 'codigo_implementos','cod');
 	}
 	public function usuarios()
     {
-        return $this->hasMany(App\Usuario::class,'cedula_usuarios','cedula');
+        return $this->hasMany(Usuario::class,'cedula_usuarios','cedula');
     }
 
 }

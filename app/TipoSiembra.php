@@ -13,6 +13,6 @@ class TipoSiembra extends Model
 
 	public function siembras()
     {
-        return $this->hasMany(App\Siembra::class,'codigo_tipo_siembra','codigo');
+        return $this->hasMany(Siembra::class,'codigo_tipo_siembra','codigo');
     }
 }

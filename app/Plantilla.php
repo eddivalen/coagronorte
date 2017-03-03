@@ -12,11 +12,15 @@ class Plantilla extends Model
 	public $timestamps    = false;
 	protected $fillable   = ['codigo','codigo_actividad','ciclo_dias_conteo','dias_alerta'];
 
-	public function actividad(){
-		return $this->belongsTo(App\Actividad::class, 'codigo_actividad','codigo');
+	public function actividad()
+	{
+		return $this->belongsTo(Actividad::class, 'codigo_actividad','codigo');
 	}
-	public function usuarios() {
-    	return $this->belongsToMany('App\Usuario','detalle_plantilla','codigo','cedula')->using('App\DetallePlantilla')
-            ->withPivot('cumplimiento','fecha_inicio');
+
+	public function usuarios()
+	{
+    	return $this->belongsToMany(Usuario::class,'detalle_plantilla', 'codigo', 'cedula')
+    		->using(DetallePlantilla::class)
+       		->withPivot('cumplimiento', 'fecha_inicio');
     }
 }

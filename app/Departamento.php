@@ -13,6 +13,6 @@ class Departamento extends Model
 
 	public function municipios()
     {
-        return $this->hasMany(App\Municipio::class,'codigo_departamento','codigo');
+        return $this->hasMany(Municipio::class,'codigo_departamento','codigo');
     }
 }

@@ -24,7 +24,6 @@ class CreateTipoSiembraRequest extends FormRequest
     public function rules()
     {
         return [
-            'codigo' => 'required|unique:tipo_siembra,codigo',
             'descripcion' => 'required|string|max:250',
         ];
     }

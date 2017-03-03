@@ -14,17 +14,17 @@ class Visita extends Model
 
 	public function estados_siembras()
     {
-        return $this->hasMany(App\EstadoSiembra::class,'codigo_visitas','codigo');
+        return $this->hasMany(EstadoSiembra::class,'codigo_visitas','codigo');
     }
     public function siembra(){
-		return $this->belongsTo(App\Siembra::class, 'codigo_siembra','codigo');
+		return $this->belongsTo(Siembra::class, 'codigo_siembra','codigo');
 	}
 	 public function visitas() {
-    	return $this->belongsToMany('App\Producto','producto_recomendaciones','codigo','codigo')->using('App\ProductoRecomendacion')
+    	return $this->belongsToMany(Producto::class,'producto_recomendaciones','codigo','codigo')->using(ProductoRecomendacion::class)
             ->withPivot('cantidad','dosis','aplicacion','observaciones','archivo');
     }
     public function recorridos()
     {
-        return $this->hasMany(App\Recorrido::class,'codigo_visita','codigo');
+        return $this->hasMany(Recorrido::class,'codigo_visita','codigo');
     }
 }

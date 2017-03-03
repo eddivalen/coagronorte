@@ -38,7 +38,10 @@ class UnidadController extends Controller
     public function store(CreateUnidadRequest $request)
     {
        $unidad = Unidad::create($request->input());
-       return response()->json(['ok'=>'Unidad creada','unidad'=>$unidad],200);
+       return response()->json([
+        'ok'     => 'Unidad creada',
+        'unidad' => $unidad
+        ],201);
     
     }
 
@@ -77,7 +80,10 @@ class UnidadController extends Controller
 
         $unidad->update($request->input());
 
-        return response()->json(['ok' => 'Actualizado','unidad'=>$unidad], 200);
+        return response()->json([
+            'ok'     => 'Actualizado',
+            'unidad' => $unidad
+            ], 200);
     
     }
 

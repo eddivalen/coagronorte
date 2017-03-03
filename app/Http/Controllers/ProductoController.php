@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Http\Requests\CreateVariedadRequest;
-use App\Http\Requests\UpdateVariedadRequest;
-use App\Variedad;
+use App\Http\Requests\CreateProductoRequest;
+use App\Http\Requests\UpdateProductoRequest;
+use App\Producto;
+use App\Unidad;
 
-class VariedadController extends Controller
+class ProductoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class VariedadController extends Controller
      */
     public function index()
     {
-        $variedades = Variedad::paginate(10);
-        return response()->json(['variedades'=>$variedades]);
+        $productos = Producto::paginate(10);
+        return response()->json(['productos'=>$productos]);
     }
 
     /**
@@ -37,13 +37,15 @@ class VariedadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateVariedadRequest $request)
-    {
-       $variedad = Variedad::create($request->input());
-       return response()->json([
-        'ok'       => 'Variedad creada',
-        'variedad' =>$variedad
-        ],201);
+    public function store(CreateProductoRequest $request)
+    {   
+        $producto = Producto::create($request->input());
+
+        return response()->json([
+            'ok'       => 'Producto creado',
+            'producto' => $producto
+        ],201);    
+    
     }
 
     /**
@@ -75,15 +77,15 @@ class VariedadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateVariedadRequest $request, $id)
+    public function update(UpdateProductoRequest $request, $id)
     {
-        $variedad = Variedad::findOrFail($id);
+        $producto = Producto::findOrFail($id);
 
-        $variedad->update($request->input());
+        $producto->update($request->input());
 
         return response()->json([
             'ok'       => 'Actualizado',
-            'variedad' => $variedad
+            'producto' => $producto
             ], 200);
     }
 
@@ -95,9 +97,9 @@ class VariedadController extends Controller
      */
     public function destroy($id)
     {
-        $variedad = Variedad::findOrFail($id);
+        $producto = Producto::findOrFail($id);
         
-        $variedad->delete();
+        $producto->delete();
 
         return response()->json(['ok'=>'Eliminado'],200);
     }

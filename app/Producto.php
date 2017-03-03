@@ -13,14 +13,15 @@ class Producto extends Model
 	protected $fillable   = ['codigo','nombre','codigo_unidad',];
 
 	public function unidad(){
-		return $this->belongsTo(App\Unidad::class, 'codigo_unidad','codigo');
+		return $this->belongsTo(Unidad::class, 'codigo_unidad','codigo');
 	}
 	public function productos_recomendaciones()
     {
-        return $this->hasMany(App\ProductoRecomendacion::class,'codigo_producto','codigo');
+        return $this->hasMany(ProductoRecomendacion::class,'codigo_producto','codigo');
     }
     public function visitas() {
-    	return $this->belongsToMany('App\Visita','producto_recomendaciones','codigo','codigo')->using('App\ProductoRecomendacion')
-            ->withPivot('cantidad','dosis','aplicacion','observaciones','archivo');
+    	return $this->belongsToMany(Visita::class,'producto_recomendaciones','codigo','codigo')
+             ->using(ProductoRecomendacion::class)
+             ->withPivot('cantidad','dosis','aplicacion','observaciones','archivo');
     }
 }

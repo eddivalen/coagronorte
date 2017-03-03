@@ -20,13 +20,13 @@ class Usuario extends Authenticatable
 	protected $fillable   = ['cedula','nombre_usuario','nombre','apellido','password','correo_electronico','telefono','fecha_inscripcion','codigo_tipo_usuario'];
 
 	public function detalle_implemento(){
-		return $this->belongsTo(App\DetalleImplemento::class, 'cedula','cedula_usuarios');
+		return $this->belongsTo(DetalleImplemento::class, 'cedula','cedula_usuarios');
 	}
 	public function tipo_usuario(){
 		return $this->belongsTo(TipoUsuario::class, 'codigo_tipo_usuario','codigo');
 	}
 	public function plantillas() {
-    	return $this->belongsToMany('App\Plantilla','detalle_plantilla','cedula','codigo')->using('App\DetallePlantilla')
+    	return $this->belongsToMany(Plantilla::class,'detalle_plantilla','cedula','codigo')->using(DetallePlantilla::class)
             ->withPivot('cumplimiento','fecha_inicio');
     }
 

@@ -24,7 +24,7 @@ class UpdateTipoSemillaRequest extends FormRequest
     public function rules()
     {
         return [
-           'descripcion' => 'required|string|max:250',
+           'descripcion' => 'string|max:250',
         ];
     }
      public function response(array $errors) {

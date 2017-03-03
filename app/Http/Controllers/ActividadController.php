@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Http\Requests\CreateVariedadRequest;
-use App\Http\Requests\UpdateVariedadRequest;
-use App\Variedad;
-
-class VariedadController extends Controller
+use App\Http\Requests\CreateActividadRequest;
+use App\Http\Requests\UpdateActividadRequest;
+use App\Actividad;
+class ActividadController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +15,8 @@ class VariedadController extends Controller
      */
     public function index()
     {
-        $variedades = Variedad::paginate(10);
-        return response()->json(['variedades'=>$variedades]);
+        $actividades = Actividad::paginate(10);
+        return response()->json(['actividades'=>$actividades]);
     }
 
     /**
@@ -37,12 +35,12 @@ class VariedadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateVariedadRequest $request)
+    public function store(CreateActividadRequest $request)
     {
-       $variedad = Variedad::create($request->input());
+       $actividad = Actividad::create($request->input());
        return response()->json([
-        'ok'       => 'Variedad creada',
-        'variedad' =>$variedad
+        'ok'        =>'Actividad creada',
+        'actividad' =>$actividad
         ],201);
     }
 
@@ -75,15 +73,15 @@ class VariedadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateVariedadRequest $request, $id)
+    public function update(UpdateActividadRequest $request, $id)
     {
-        $variedad = Variedad::findOrFail($id);
+        $actividad = Actividad::findOrFail($id);
 
-        $variedad->update($request->input());
+        $actividad->update($request->input());
 
         return response()->json([
-            'ok'       => 'Actualizado',
-            'variedad' => $variedad
+            'ok'        => 'Actualizado',
+            'actividad' => $actividad
             ], 200);
     }
 
@@ -95,9 +93,9 @@ class VariedadController extends Controller
      */
     public function destroy($id)
     {
-        $variedad = Variedad::findOrFail($id);
+        $actividad = Actividad::findOrFail($id);
         
-        $variedad->delete();
+        $actividad->delete();
 
         return response()->json(['ok'=>'Eliminado'],200);
     }

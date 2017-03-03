@@ -38,7 +38,10 @@ class TipoUsuarioController extends Controller
     public function store(CreateTipoUsuarioRequest $request)
     {
        $tipousuario = TipoUsuario::create($request->input());
-       return response()->json(['ok'=>'TipoUsuario creado','tipousuario'=>$tipousuario],200);
+       return response()->json([
+        'ok'          => 'TipoUsuario creado',
+        'tipousuario' => $tipousuario
+        ],201);
     }
 
     /**
@@ -76,7 +79,10 @@ class TipoUsuarioController extends Controller
 
         $tipousuario->update($request->input());
 
-        return response()->json(['ok' => 'Actualizado','tipousuario'=>$tipousuario], 200);
+        return response()->json([
+            'ok'          => 'Actualizado',
+            'tipousuario' => $tipousuario
+            ], 200);
     }
 
     /**

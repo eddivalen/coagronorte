@@ -13,6 +13,6 @@ class Variedad extends Model
 
 	public function siembras()
     {
-        return $this->hasMany(App\Siembra::class,'codigo_variedad','codigo');
+        return $this->hasMany(Siembra::class,'codigo_variedad','codigo');
     }
 }

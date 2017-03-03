@@ -24,7 +24,6 @@ class CreateTipoSemillaRequest extends FormRequest
     public function rules()
     {
         return [
-            'codigo' => 'required|unique:tipo_semilla,codigo',
             'descripcion' => 'required|string|max:250',
         ];
     }

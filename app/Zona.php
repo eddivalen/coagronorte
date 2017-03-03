@@ -13,10 +13,10 @@ class Zona extends Model
 
 	public function ciudad()
     {
-        return $this->belongsTo(App\Ciudad::class,'codigo_ciudad','codigo');
+        return $this->belongsTo(Ciudad::class,'codigo_ciudad','codigo');
     }
     public function lotes()
     {
-        return $this->hasMany(App\Lote::class,'codigo_zona','codigo');
+        return $this->hasMany(Lote::class,'codigo_zona','codigo');
     }
 }

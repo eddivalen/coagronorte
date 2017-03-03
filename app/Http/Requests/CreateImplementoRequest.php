@@ -24,9 +24,7 @@ class CreateImplementoRequest extends FormRequest
     public function rules()
     {
         return [
-            'cod' => 'required|unique:implementos,cod',
-            'descripcion' => 'required|string|max:250',
-        
+            'descripcion' => 'required|string|max:250',        
         ];
     }
      public function response(array $errors) {

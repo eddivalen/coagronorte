@@ -13,6 +13,6 @@ class TipoRiego extends Model
 
 	public function lotes()
     {
-        return $this->hasMany(App\Lote::class,'codigo_riego','codigo');
+        return $this->hasMany(Lote::class,'codigo_riego','codigo');
     }
 }

@@ -50,7 +50,9 @@ class UsuarioController extends Controller
         $usuario->save();
         // Enviar correo para confirmar cuenta
         $this->dispatch(new EnviarConfirmacionDeCuenta($usuario));
-        return response()->json(['ok'=>'Usuario creado, validar correo'],200);
+        return response()->json([
+            'ok'=>'Usuario creado, validar correo'
+            ],201);
     }
 
     /**

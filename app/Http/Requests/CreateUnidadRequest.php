@@ -24,7 +24,6 @@ class CreateUnidadRequest extends FormRequest
     public function rules()
     {
         return [
-            'codigo' => 'required|unique:unidades,codigo',
             'descripcion' => 'required|string|max:250',
         ];
     }

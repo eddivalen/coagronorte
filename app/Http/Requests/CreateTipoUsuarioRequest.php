@@ -24,7 +24,6 @@ class CreateTipoUsuarioRequest extends FormRequest
     public function rules()
     {
         return [
-               'codigo' => 'required|unique:tipo_usuarios,codigo',
             'descripcion' => 'required|string|max:250',
         ];
     }

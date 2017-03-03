@@ -39,7 +39,10 @@ class TipoSemillaController extends Controller
     public function store(CreateTipoSemillaRequest $request)
     {
        $tiposemilla = TipoSemilla::create($request->input());
-       return response()->json(['ok'=>'Tipo semilla creada','tiposemilla'=>$tiposemilla],200);
+       return response()->json([
+        'ok'          => 'Tipo semilla creada',
+        'tiposemilla' => $tiposemilla
+        ],201);
     }
 
     /**
@@ -77,7 +80,10 @@ class TipoSemillaController extends Controller
 
         $tiposemilla->update($request->input());
 
-        return response()->json(['ok' => 'Actualizado','tiposemilla'=>$tiposemilla], 200);
+        return response()->json([
+            'ok'          => 'Actualizado',
+            'tiposemilla' => $tiposemilla
+            ], 200);
      
     }
 

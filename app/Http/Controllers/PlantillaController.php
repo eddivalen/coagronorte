@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Http\Requests\CreateVariedadRequest;
-use App\Http\Requests\UpdateVariedadRequest;
-use App\Variedad;
-
-class VariedadController extends Controller
+use App\Http\Requests\CreatePlantillaRequest;
+use App\Http\Requests\UpdatePlantillaRequest;
+use App\Plantilla;
+use App\Actividad;
+class PlantillaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +16,8 @@ class VariedadController extends Controller
      */
     public function index()
     {
-        $variedades = Variedad::paginate(10);
-        return response()->json(['variedades'=>$variedades]);
+        $plantillas = Plantilla::paginate(10);
+        return response()->json(['plantillas'=>$plantillas]);
     }
 
     /**
@@ -37,13 +36,14 @@ class VariedadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateVariedadRequest $request)
-    {
-       $variedad = Variedad::create($request->input());
-       return response()->json([
-        'ok'       => 'Variedad creada',
-        'variedad' =>$variedad
-        ],201);
+    public function store(CreatePlantillaRequest $request)
+    {   
+        $plantilla = Plantilla::create($request->input());
+
+        return response()->json([
+            'ok'        => 'Plantilla creada',
+            'plantilla' => $plantilla
+        ],201);    
     }
 
     /**
@@ -75,15 +75,15 @@ class VariedadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateVariedadRequest $request, $id)
+    public function update(UpdatePlantillaRequest $request, $id)
     {
-        $variedad = Variedad::findOrFail($id);
+        $plantilla = Plantilla::findOrFail($id);
 
-        $variedad->update($request->input());
+        $plantilla->update($request->input());
 
         return response()->json([
             'ok'       => 'Actualizado',
-            'variedad' => $variedad
+            'plantilla' => $plantilla
             ], 200);
     }
 
@@ -95,9 +95,9 @@ class VariedadController extends Controller
      */
     public function destroy($id)
     {
-        $variedad = Variedad::findOrFail($id);
+        $plantilla = Plantilla::findOrFail($id);
         
-        $variedad->delete();
+        $plantilla->delete();
 
         return response()->json(['ok'=>'Eliminado'],200);
     }

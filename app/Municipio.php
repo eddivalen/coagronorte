@@ -13,11 +13,11 @@ class Municipio extends Model
 
 	public function ciudades()
     {
-        return $this->hasMany(App\Ciudad::class,'codigo_municipio','codigo');
+        return $this->hasMany(Ciudad::class,'codigo_municipio','codigo');
     }
     public function departamento()
     {
-        return $this->belongsTo(App\Departamento::class,'codigo_deparmento','codigo');
+        return $this->belongsTo(Departamento::class,'codigo_deparmento','codigo');
     }
 
 }

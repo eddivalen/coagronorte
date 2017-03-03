@@ -27,19 +27,28 @@ Route::post('login', 'LoginController@login');
 		Route::resource('variedad','VariedadController', ['only' => [
 		'index', 'show', 'store', 'update', 'destroy'
 		]]);
-		Route::resource('tiposiembra','TipoSiembraController', ['only' => [
+		Route::resource('tipo-siembra','TipoSiembraController', ['only' => [
 		'index', 'show', 'store', 'update', 'destroy'
 		]]);
-		Route::resource('tiposemilla','TipoSemillaController', ['only' => [
+		Route::resource('tipo-semilla','TipoSemillaController', ['only' => [
 		'index', 'show', 'store', 'update', 'destroy'
 		]]);
-		Route::resource('tipousuario','TipoUsuarioController', ['only' => [
+		Route::resource('tipo-usuario','TipoUsuarioController', ['only' => [
 		'index', 'show', 'store', 'update', 'destroy'
 		]]);
 		Route::resource('implemento','ImplementoController', ['only' => [
 		'index', 'show', 'store', 'update', 'destroy'
 		]]);
 		Route::resource('unidad','UnidadController', ['only' => [
+		'index', 'show', 'store', 'update', 'destroy'
+		]]);
+		Route::resource('actividad','ActividadController', ['only' => [
+		'index', 'show', 'store', 'update', 'destroy'
+		]]);
+		Route::resource('plantilla','PlantillaController', ['only' => [
+		'index', 'show', 'store', 'update', 'destroy'
+		]]);
+		Route::resource('producto','ProductoController', ['only' => [
 		'index', 'show', 'store', 'update', 'destroy'
 		]]);
 		Route::get('logout', 'LoginController@logout');

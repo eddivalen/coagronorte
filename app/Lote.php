@@ -12,9 +12,9 @@ class Lote extends Model
 	protected $fillable   = ['codigo','vereda','codigo_zona','area','propietario','tenencia','analisis_suelo','fecha_analisis_suelo','pinsat','planos','archivo_planos','venta','asistencia_tecnica','codigo_riego','longitud','latitud'];
 
 	public function tipo_riego(){
-		return $this->belongsTo(App\TipoRiego::class, 'codigo_riego','codigo');
+		return $this->belongsTo(TipoRiego::class, 'codigo_riego','codigo');
 	}
 	public function zona(){
-		return $this->belongsTo(App\Zona::class, 'codigo_zona','codigo');
+		return $this->belongsTo(Zona::class, 'codigo_zona','codigo');
 	}
 }

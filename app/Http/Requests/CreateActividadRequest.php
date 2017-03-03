@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateTipoUsuarioRequest extends FormRequest
+class CreateActividadRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,10 @@ class UpdateTipoUsuarioRequest extends FormRequest
     public function rules()
     {
         return [
-            'descripcion' => 'string|max:250',
+            'descripcion' => 'required|string|max:250',
         ];
     }
-     public function response(array $errors) {
+    public function response(array $errors) {
         return response()->json(compact('errors'),422);
     }
 }

@@ -14,6 +14,6 @@ class Actividad extends Model
 
 	public function plantillas()
     {
-        return $this->hasMany(App\Plantilla::class,'codigo_actividad','codigo');
+        return $this->hasMany(Plantilla::class, 'codigo_actividad','codigo');
     }
 }

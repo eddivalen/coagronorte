@@ -12,10 +12,10 @@ class Ciudad extends Model
 	protected $fillable   = ['codigo','descripcion','codigo_municipio'];
 
 	public function zonas(){
-		return $this->hasMany(App\Zona::class,'codigo_ciudad','codigo');
+		return $this->hasMany(Zona::class,'codigo_ciudad','codigo');
 	}
 	public function municipio(){
-		return $this->belongsTo(App\Municipio::class, 'codigo_municipio','codigo');
+		return $this->belongsTo(Municipio::class, 'codigo_municipio','codigo');
 	}
 
 }

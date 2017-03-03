@@ -12,6 +12,6 @@ class Recorrido extends Model
 	protected $fillable   = ['punto','latitud','longitud','codigo_visita'];
 
 	public function visita(){
-		return $this->belongsTo(App\Visita::class, 'codigo_visita','codigo');
+		return $this->belongsTo(Visita::class, 'codigo_visita','codigo');
 	}
 }

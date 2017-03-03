@@ -24,7 +24,6 @@ class CreateVariedadRequest extends FormRequest
     public function rules()
     {
         return [
-            'codigo' => 'required|unique:variedad,codigo',
             'descripcion' => 'required|string|max:250',
         ];
     }
