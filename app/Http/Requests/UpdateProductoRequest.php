@@ -24,7 +24,7 @@ class UpdateProductoRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre'        => 'string|max:250',
+            'nombre'        => 'string|max:50',
             'codigo_unidad' => 'exists:unidades,codigo|numeric'
         ];
     }

@@ -24,7 +24,7 @@ class CreateProductoRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre'        => 'required|string|max:250',
+            'nombre'        => 'required|string|max:50',
             'codigo_unidad' => 'required|exists:unidades,codigo|numeric'
         ];
     }

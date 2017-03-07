@@ -24,7 +24,7 @@ class UpdateUnidadRequest extends FormRequest
     public function rules()
     {
         return [
-            'descripcion' => 'string|max:250',
+            'descripcion' => 'string|max:50',
         ];
     }
      public function response(array $errors) {
