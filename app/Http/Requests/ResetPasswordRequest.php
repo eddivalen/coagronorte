@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use App\Traits\FailValidationRequest;
 class ResetPasswordRequest extends FormRequest
 {
     /**
@@ -30,9 +30,5 @@ class ResetPasswordRequest extends FormRequest
              'password'              => 'required|confirmed',
         ];
 
-    }
-    public function response(array $errors) {
-       // var_dump($errors);
-        return 'Error de request';
     }
 }

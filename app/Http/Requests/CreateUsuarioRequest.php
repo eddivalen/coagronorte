@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use App\Traits\FailValidationRequest;
 class CreateUsuarioRequest extends FormRequest
 {
     /**
@@ -32,8 +32,5 @@ class CreateUsuarioRequest extends FormRequest
             'telefono'           => 'required|string|max:50',
             'fecha_inscripcion'  => 'date',
         ];
-    }
-     public function response(array $errors) {
-        return response()->json(compact('errors'), 422);
     }
 }

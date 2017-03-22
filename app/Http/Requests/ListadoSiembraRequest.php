@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Traits\FailValidationRequest;
-class CreateActividadRequest extends FormRequest
+class ListadoSiembraRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,10 @@ class CreateActividadRequest extends FormRequest
     public function rules()
     {
         return [
-            'descripcion' => 'required|string|max:50',
+            'municipio'   =>'exists:municipios,codigo|numeric'
+            'zona'        =>'exists:zonas,codigo|numeric',
+            'vereda'      =>'string|max:50',
+            'propietario' =>'exists:usuarios,cedula|string|max:50',
         ];
     }
 }

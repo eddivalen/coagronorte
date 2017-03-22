@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use App\Traits\FailValidationRequest;
 class CreateProductoRequest extends FormRequest
 {
     /**
@@ -27,8 +27,5 @@ class CreateProductoRequest extends FormRequest
             'nombre'        => 'required|string|max:50',
             'codigo_unidad' => 'required|exists:unidades,codigo|numeric'
         ];
-    }
-    public function response(array $errors) {
-        return response()->json(compact('errors'),422);
     }
 }

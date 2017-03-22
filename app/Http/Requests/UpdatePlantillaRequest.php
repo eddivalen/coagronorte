@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use App\Traits\FailValidationRequest;
 class UpdatePlantillaRequest extends FormRequest
 {
     /**
@@ -28,8 +28,5 @@ class UpdatePlantillaRequest extends FormRequest
             'ciclo_dias_conteo' => 'numeric',
             'dias_alerta'       => 'numeric',
         ];
-    }
-      public function response(array $errors) {
-        return response()->json(compact('errors'),422);
     }
 }

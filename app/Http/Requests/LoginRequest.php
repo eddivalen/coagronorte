@@ -28,14 +28,4 @@ class LoginRequest extends FormRequest
             'password'           => 'required'
         ];
     }
-
-    /**
-     * Responde con posibles errores de la validaciom
-     * @param  array  $errors Errores
-     * @return Response         errors
-     */
-    public function response(array $errors)
-    {
-        return response()->json(compact('errors'), 422);
-    }
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Zona extends Model
 {
-    protected $table      = 'codigo';
+    protected $table      = 'zonas';
 	protected $primaryKey = 'codigo';
 	public $timestamps    = false;
 	protected $fillable   = ['codigo','descripcion','codigo_ciudad'];

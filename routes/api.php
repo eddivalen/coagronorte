@@ -51,6 +51,17 @@ Route::post('login', 'LoginController@login');
 		Route::resource('producto','ProductoController', ['only' => [
 		'index', 'show', 'store', 'update', 'destroy'
 		]]);
+		Route::resource('siembra','SiembraController', ['only' => [
+		'index', 'show', 'store', 'update', 'destroy'
+		]]);
+		Route::resource('lote','LoteController', ['only' => [
+		'index', 'show', 'store', 'update', 'destroy'
+		]]);
+		Route::resource('visita','VisitaController', ['only' => [
+		'index', 'show', 'store', 'update', 'destroy'
+		]]);
+		Route::get('programar-visita', 'VisitaController@programarVisitaLista');
+		Route::post('programar-visita', 'VisitaController@programarVisita');
 		Route::get('logout', 'LoginController@logout');
 		Route::resource('usuarios', 'UsuarioController');
 	});

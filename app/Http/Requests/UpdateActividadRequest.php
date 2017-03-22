@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use App\Traits\FailValidationRequest;
 class UpdateActividadRequest extends FormRequest
 {
     /**
@@ -24,10 +24,7 @@ class UpdateActividadRequest extends FormRequest
     public function rules()
     {
         return [
-            'descripcion' => 'required|string|max:50',
+            'descripcion' => 'string|max:50',
         ];
-    }
-    public function response(array $errors) {
-        return response()->json(compact('errors'),422);
     }
 }

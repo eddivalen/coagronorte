@@ -17,4 +17,10 @@ class Lote extends Model
 	public function zona(){
 		return $this->belongsTo(Zona::class, 'codigo_zona','codigo');
 	}
+	public function siembrasItem() {
+		return $this->hasMany(Siembra::class, 'codigo_lote', 'codigo');
+	}
+	public function propietarioItem() {
+		return $this->belongsTo(Usuario::class, 'propietario', 'cedula');
+	}
 }

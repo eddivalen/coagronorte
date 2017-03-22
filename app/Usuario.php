@@ -29,7 +29,9 @@ class Usuario extends Authenticatable
     	return $this->belongsToMany(Plantilla::class,'detalle_plantilla','cedula','codigo')->using(DetallePlantilla::class)
             ->withPivot('cumplimiento','fecha_inicio');
     }
-
+    public function visitas(){
+        return $this->hasMany(Visita::class,'agronomo','cedula');
+    }
     /**
      * Permite encriptar automaticamente la contraseña al guardar masivamente
      * @param String $password 

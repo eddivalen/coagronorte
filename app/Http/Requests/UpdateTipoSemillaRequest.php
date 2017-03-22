@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use App\Traits\FailValidationRequest;
 class UpdateTipoSemillaRequest extends FormRequest
 {
     /**
@@ -26,8 +26,5 @@ class UpdateTipoSemillaRequest extends FormRequest
         return [
            'descripcion' => 'string|max:50',
         ];
-    }
-     public function response(array $errors) {
-        return response()->json(compact('errors'),422);
     }
 }

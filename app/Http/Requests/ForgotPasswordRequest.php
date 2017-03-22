@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use App\Traits\FailValidationRequest;
 class ForgotPasswordRequest extends FormRequest
 {
     /**
@@ -26,8 +26,5 @@ class ForgotPasswordRequest extends FormRequest
         return [
             'correo_electronico' => 'required|exists:usuarios,correo_electronico'
         ];
-    }
-    public function response(array $errors) {
-        return response()->json(compact('errors'), 422);
     }
 }

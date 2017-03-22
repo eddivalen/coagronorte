@@ -176,12 +176,15 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\ResponseMacroServiceProvider::class,
 
         //Proveedores Externos
         //JWT-Auth
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         //Debugbar
         Barryvdh\Debugbar\ServiceProvider::class,
+        //Fractal
+        Spatie\Fractal\FractalServiceProvider::class,
 
     ],
 
@@ -235,6 +238,7 @@ return [
         'JWTFactory'   => Tymon\JWTAuth\Facades\JWTFactory::class,
         'Uuid'         => Ramsey\Uuid\Uuid::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Fractal' => Spatie\Fractal\FractalFacade::class,
     ],
 
 ];

@@ -24,4 +24,7 @@ class Siembra extends Model
     public function tipo_semilla(){
 		return $this->belongsTo(TipoSemilla::class, 'codigo_tipo_semilla','codigo');
 	}
+	public function lote(){
+		return $this->belongsTo(Lote::class, 'codigo_lote', 'codigo');
+	}
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use App\Traits\FailValidationRequest;
 class CreateTipoUsuarioRequest extends FormRequest
 {
     /**
@@ -26,8 +26,5 @@ class CreateTipoUsuarioRequest extends FormRequest
         return [
             'descripcion' => 'required|string|max:50',
         ];
-    }
-     public function response(array $errors) {
-        return response()->json(compact('errors'),422);
     }
 }
