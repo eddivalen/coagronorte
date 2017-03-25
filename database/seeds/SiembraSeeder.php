@@ -11,6 +11,6 @@ class SiembraSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Siembra::class)->create();
+        factory(App\Siembra::class,10)->create();
     }
 }

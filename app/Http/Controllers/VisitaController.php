@@ -8,25 +8,25 @@ use App\Http\Requests\UpdateVisitaRequest;
 use App\Http\Requests\ListadoVisitaRequest;
 use App\Http\Requests\ProgramarVisitaListaRequest;
 use App\Http\Requests\ProgramarVisitaRequest;
-use App\Http\Transformers\VisitaTransformer;
 use App\Http\Transformers\VisitasCollectionTransformer;
-use App\Http\Transformers\ProgramarVisitaCollectionTransformer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use League\Fractal;
+use JWTAuth;
 use App\Visita;
 use App\Siembra;
 use App\Usuario;
 use App\Municipio;
 use App\Zona;
 use App\Lote;
-use JWTAuth;
+
 class VisitaController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
+     * Listado de siembras 
+     * Metodo GET con parametro de busqueda por rango de fecha y por fecha especifica.
      * @return \Illuminate\Http\Response
+     * @param  ListadoVisitaRequest $request request del cliente
      */
     public function index(ListadoVisitaRequest $request)//
     { 
@@ -49,10 +49,10 @@ class VisitaController extends Controller
         }      
     }
     /**
-     * Muestra las visitas disponibles para programarlas
-     * con filtros de busqueda
-     *
-     * @return \Illuminate\Http\Response
+     * Metodo GET, Muestra las siembras con filtros de busqueda para ser programadas
+     * filtros: zona, vereda, municipio, propietario.
+     * @return Response lotes
+     * @param  ListadoVisitaRequest $request request del cliente
      */
     public function programarVisitaLista(ProgramarVisitaListaRequest $request){
         $lotes_q = (new Lote)->newQuery();
@@ -107,7 +107,7 @@ class VisitaController extends Controller
      * Registra la visita a partir de la lista mostrada
      * 
      *
-     * @return \Illuminate\Http\Response
+     * @return Response                         Ok
      */
     public function programarVisita(ProgramarVisitaRequest $request){
         $visita = Visita::create($request->input());

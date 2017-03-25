@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Requests\CreateUsuarioRequest;
+use App\Http\Requests\UpdateUsuarioRequest;
 use App\Http\Requests\ForgotPasswordRequest;
 use App\Http\Requests\ConfirmacionRequest;
-//use Illuminate\Support\Facades\Validator;
 use App\Usuario;
 
 use App\Jobs\EnviarConfirmacionDeCuenta;
@@ -25,7 +25,8 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
+        $usuarios = Usuario::paginate(10);
+        return response()->json(['usuarios'=>$usuarios]);
     }
 
     /**
@@ -84,9 +85,16 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUsuarioRequest $request, $id)
     {
-        //
+        $usuario = Lote::findOrFail($id);
+
+        $usuario->update($request->input());
+
+        return response()->json([
+            'ok'       => 'Actualizado',
+            'usuario' => $usuario
+            ], 200);
     }
 
     /**
@@ -97,7 +105,12 @@ class UsuarioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $usuario = Usuario::findOrFail($id);
+        
+        $usuario->delete();
+
+        return response()->json(['ok'=>'Eliminado'],200);
+    
     }
   
     

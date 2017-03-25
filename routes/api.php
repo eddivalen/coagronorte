@@ -24,6 +24,9 @@ Route::post('login', 'LoginController@login');
 //Route::post('forgot_password', 'PasswordController@forgotPassword');
 	
 	Route::group(['middleware' => 'jwt.auth'], function() {
+		Route::resource('usuario','VisitaController', ['only' => [
+		'index', 'show', 'store', 'update', 'destroy'
+		]]);
 		Route::resource('variedad','VariedadController', ['only' => [
 		'index', 'show', 'store', 'update', 'destroy'
 		]]);

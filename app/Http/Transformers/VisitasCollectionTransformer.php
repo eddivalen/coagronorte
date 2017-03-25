@@ -22,7 +22,7 @@ class VisitasCollectionTransformer extends Fractal\TransformerAbstract {
 		'agronomo',
 	];
 	/**
-	 * Incluye por defecto a la respuesta el propietario del inmueble
+	 * Incluye por defecto a la respuesta el agronomo
 	 * @var Array
 	 */
 	protected $defaultIncludes = ['agronomo'];

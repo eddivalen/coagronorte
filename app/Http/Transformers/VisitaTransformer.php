@@ -24,14 +24,14 @@ class VisitaTransformer extends Fractal\TransformerAbstract {
 		'agronomo',
 	];
 	/**
-	 * Incluye por defecto a la respuesta el propietario del inmueble
+	 * Incluye por defecto al agronomo
 	 * @var Array
 	 */
 	protected $defaultIncludes = ['agronomo'];
 
 	/**
 	 * Método de transformación de la respuesta
-	 * @param  Inmueble $inmueble inmueble
+	 * @param  Visita $visita visita
 	 * @return Array             transformer
 	 */
 	public function transform(Visita $visita) {
@@ -46,9 +46,9 @@ class VisitaTransformer extends Fractal\TransformerAbstract {
 	}
 
 	/**
-	 * Incluye al propietario del inmueble en caso de tenerlo
-	 * @param  Inmueble $inmueble Inmueble
-	 * @return Fractar\Item             Usuario tranformado
+	 * Incluye al agronomo de la siembra en caso de tenerlo
+	 * @param  Visita $visita Visita
+	 * @return Fractal\Item             Agronomo transformado
 	 */
 	public function includeAgronomo(Visita $visita) {
 		$agronomo = $visita->agronomo;
@@ -57,6 +57,11 @@ class VisitaTransformer extends Fractal\TransformerAbstract {
 		}
 		return $this->item($agronomo, new UsuarioTransformer);
 	}
+	/**
+	 * Incluye a la siembra en caso de tenerlo
+	 * @param  Visita $visita Visita
+	 * @return Fractal\Item             Siembra transformado
+	 */
 	public function includeSiembra(Visita $visita){
 		$siembra = $visita->siembra;
 		if (is_null($siembra)) {
@@ -64,6 +69,11 @@ class VisitaTransformer extends Fractal\TransformerAbstract {
 		}
 		return $this->item($siembra, new SiembraTransformer);
 	}
+	/**
+	 * Incluye al lote en caso de tenerlo
+	 * @param  Visita $visita Visita
+	 * @return Fractal\Item             LOte transformado
+	 */
 	public function includeLote(Visita $visita){
 		$lote = $visita->lote;
 		if (is_null($lote)) {

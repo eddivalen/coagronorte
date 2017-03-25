@@ -21,9 +21,6 @@ Route::get('/passwords/reset','PasswordController@resetView');
 
 Route::post('/passwords/reseted','PasswordController@reestablecerContrasena');
 
-
-
-
 Route::get('forgot_password', 'PasswordController@forgotPassword');
 Route::post('forgot_password', 'PasswordController@forgotPassword');
 
@@ -36,4 +33,4 @@ Route::get('reestablecer-contrasena', 'PasswordController@reestablecerView');
 Route::post('reestablecer-contrasena',['as' => 'reestablecerContrasena', 'uses'=>'PasswordController@forgotPassword']);
 //Auth::routes();
 
-//Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@index');

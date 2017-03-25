@@ -50,7 +50,7 @@ $factory->define(App\Lote::class, function(Faker\Generator $faker){
 });
 $factory->define(App\Siembra::class, function(Faker\Generator $faker){
 	return [
-		'fecha_siembra'          => $faker->date($format = 'Y-m-d', $max = 'now'),
+		'fecha_siembra'          => => $faker->dateTimeBetweenFormat($startDate = 'now', $endDate = '+1 week', $timezone = null, $format = 'Y-m-d'),
 		'fecha_siembra_estimada' => $faker->date($format = 'Y-m-d', $max = 'now'),
 		'fecha_estimada_corta'   => $faker->date($format = 'Y-m-d', $max = 'now'),
 		'fecha_real_corta'       => $faker->date($format = 'Y-m-d', $max = 'now'),

@@ -31,17 +31,17 @@ class EnviarConfirmacionDeCuenta implements ShouldQueue
      */
     public function handle()
     {
-        // Genero un token único
+        // Se genera un token único
         $token = Uuid::uuid4()->toString();
 
-        // Se general el URL de confirmación que será enviado dentro del email
+        // Se genera el URL de confirmación que será enviado dentro del email
         // al usuario
         $url = url('validar-correo').'?email='.$this->usuario->correo_electronico.'&token='.$token;
 
-        // Guardo el token en confirmation_token del usuario
+        // Se guarda el token en confirmation_token del usuario
         $this->usuario->confirmation_token = $token;
         $this->usuario->save();
-        // Envio el correo
+        // Se Envia el correo
         Mail::to($this->usuario->correo_electronico)->send(new SendConfirmationAccount($url)); 
     }
 }

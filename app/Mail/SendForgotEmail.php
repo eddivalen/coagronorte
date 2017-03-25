@@ -35,7 +35,7 @@ class SendForgotEmail extends Mailable
     public function build()
     {
         $url = $this->url;
-        $address='inscripcionesfunauta@gmail.com';
+        $address='pruebascoagronorte@gmail.com';
         $name = 'Coagronorte';
         $subject = 'Reestablecer contraseña';
         return $this->view('emails.reestablecer-contrasena',

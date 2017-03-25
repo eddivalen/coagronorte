@@ -35,7 +35,7 @@ class SendConfirmationAccount extends Mailable
     public function build()
     {
        $url = $this->url;
-        $address='inscripcionesfunauta@gmail.com';
+        $address='pruebascoagronorte@gmail.com';
         $name = 'Coagronorte';
         $subject = 'Verificar cuenta';
         return $this->view('emails.verificacion-cuenta', compact('url'))

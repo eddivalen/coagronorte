@@ -1,0 +1,556 @@
+  # Example YAML to get you started quickly.
+  # Be aware that YAML has indentation based scoping.
+  # Code completion support is available so start typing for available options.
+  swagger: '2.0'
+
+  # This is your document metadata
+  info:
+    version: "1.0.0"
+    title: "Coagronorte API Rest"
+    basePath:/api
+
+  # Describe your paths here
+  paths:
+
+  # Rutas de login y logout
+    /login:
+      post:
+        summary: Login del usuario
+        description: |
+          Permite el inicio de sesión del `usuario` con las credenciales
+          guardadas en la base de datos local de la App
+        parameters:
+          - name: correo_electronico
+            in: formData
+            description: correo electronico del `usuario`
+            required: true
+            type: string
+            format: email
+          - name: password
+            in: formData
+            description: contraseña del `usuario`
+            required: true
+            type: string
+            format: password
+        responses:
+          200:
+            description: OK
+            schema:
+              $ref: '#/definitions/LoginResponse'
+          401:
+            description: Credenciales inválidas
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                  format: apiKey
+          422:
+            description: Bad Request
+            schema:
+              $ref: "#/definitions/BadRequest"
+          500:
+            description: Internal server error
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+    /logout:
+      post:
+        summary: Logout
+        description: Permite cerrar sesión, desactivar el token
+        security: 
+          - Bearer: []
+        responses:
+          200:
+            description: OK
+            schema:
+              type: object
+              properties:
+                ok:
+                  type: string
+          422:
+            description: Bad Request
+            schema:
+              $ref: "#/definitions/BadRequest"
+            
+    # Rutas de visitas   
+    /visitas:
+      get:
+        description: |
+          Retorna una lista paginada de `visitas`, o una unica visita por agronomo según el tipo de busqueda
+          que se desee
+        parameters:
+          - name: tipo
+            in: query
+            description: Tipo de operación que se usará para la búsqueda (dia|rango)
+            required: true
+            type: string
+            format: string
+          - name: dia
+            in: query
+            description: Fecha del dia de la visita que se desea traer
+            required: true
+            type: string
+            format: date
+          - name: fecha_inicio
+            in: query
+            description: Fecha inicio de la lista de visitas que se desea traer, si el tipo es rango
+            required: true
+            type: string
+            format: date
+          - name: fecha_fin
+            in: query
+            description: Fecha fin de la lista de visitas que se desea traer, si el tipo es rango
+            required: true
+            type: string
+            format: date
+        responses:
+          200:
+            description: OK
+            schema:
+              type: object
+              properties:
+                meta:
+                  type: object
+                  properties:
+                    pagination:
+                      type: object
+                      properties:
+                        total:
+                          type: number
+                          format: integer
+                          description: Cantidad total de registros en la base de datos
+                        count:
+                          type: number
+                          format: integer
+                          description: Cantidad registros en la página
+                        per_page:
+                          type: number
+                          format: integer
+                          description: Cantidad registros por página
+                        current_page:
+                          type: number
+                          format: integer
+                          description: Página actual
+                        total_pages:
+                          type: number
+                          format: integer
+                          description: Cantidad total de páginas
+                        links:
+                          type: object
+                          properties:
+                            next:
+                              type: string
+                              description: URL de la página siguiente
+                            previous:
+                              type: string
+                              description: URL de la página anterior
+                data:
+                  type: array
+                  items:
+                    $ref: '#/definitions/VisitaPaginate'
+          422:
+            description: Bad Request
+            schema:
+              $ref: "#/definitions/BadRequest"
+
+    /programar-visita:
+      get:
+        description: |
+          Retorna una lista paginada de `lotes`, o un único lote segun su busqueda.
+        parameters:
+          - name: municipio
+            in: query
+            description: Municipio en el cual esta ubicado el lote a buscar.
+            required: false
+            type: string
+            format: string
+          - name: zona
+            in: query
+            description: Zona en el cual esta ubicado el lote a buscar..
+            required: false
+            type: string
+            format: string
+          - name: vereda
+            in: query
+            description: Vereda en el cual esta ubicado el lote a buscar.
+            required: false
+            type: string
+            format: string
+          - name: propietario
+            in: query
+            description: Propietario o Agricultor del lote a buscar.
+            required: false
+            type: string
+            format: string
+        responses:
+          200:
+            description: OK
+            schema:
+              type: object
+              properties:
+                meta:
+                  type: object
+                  properties:
+                    pagination:
+                      type: object
+                      properties:
+                        total:
+                          type: number
+                          format: integer
+                          description: Cantidad total de registros en la base de datos
+                        count:
+                          type: number
+                          format: integer
+                          description: Cantidad registros en la página
+                        per_page:
+                          type: number
+                          format: integer
+                          description: Cantidad registros por página
+                        current_page:
+                          type: number
+                          format: integer
+                          description: Página actual
+                        total_pages:
+                          type: number
+                          format: integer
+                          description: Cantidad total de páginas
+                        links:
+                          type: object
+                          properties:
+                            next:
+                              type: string
+                              description: URL de la página siguiente
+                            previous:
+                              type: string
+                              description: URL de la página anterior
+                data:
+                  type: array
+                  items:
+                    $ref: '#/definitions/VisitaPaginate'
+          422:
+            description: Bad Request
+            schema:
+              $ref: "#/definitions/BadRequest"
+
+    /programar-visita/:
+      post:
+        description: |
+          Programar una visita a partir de una siembra seleccionada
+        security:
+          - Bearer: []
+        parameters:
+          - name: fecha
+            in: path
+            description: Fecha programada para realizar la visita.
+            type: string
+            format: date
+            required: true
+          - name: codigo_siembra
+            in: formData
+            required: true
+            type: number
+            format: integer
+            description: Codigo de la siembra a la cual se le hará la visita.
+          - name: agronomo
+            in: formData
+            required: true
+            type: string
+            format: string
+            description: Agronomo logueado para realizar la visita.
+        responses:
+          200:
+            description: OK
+            schema:
+              type: object
+              properties:
+                ok:
+                  type: string
+          422:
+            description: Bad Request
+            schema:
+              $ref: "#/definitions/BadRequest"
+
+    # Rutas de usuarios
+   /crear-usuario:
+      post:
+        description: |
+          Permite registrar y crear un nuevo usuario, de poder crearse
+          se enviará un email a la persona pidiendo que valide su dirección
+        parameters:
+          - name: cedula
+            required: true
+            type: string
+            format: string
+            in: formData
+            description: Cédula de ciudadanía de la persona
+          - name: nombre_usuario
+            required: true
+            type: string
+            format: string
+            in: formData
+            description: nombre de usuario 
+          - name: correo_electronico
+            required: true
+            in: formData
+            type: string
+            format: email
+            description: correo de la persona
+          - name: nombre
+            in: formData
+            type: string
+            required: true
+            description: nombre de la persona
+          - name: apellido
+            in: formData
+            type: string
+            required: true
+            description: apellido de la persona
+          - name: password
+            in: formData
+            required: true
+            type: string
+            format: password
+            description: contraseña de la persona
+          - name: telefono
+            in: formData
+            required: true
+            type: string
+            format: phone
+            description: numero de teléfono de la persona
+          - name: fecha_inscripcion
+            in: formData
+            required: true
+            type: date
+            description: fecha de registro en el sistema
+          - name: codigo_tipo_usuario
+            in: formData
+            required: true
+            type: integer
+            description: codigo del tipo de usuario
+        responses:
+          200:
+            description: OK
+            schema:
+              type: object
+              properties:
+                ok:
+                  type: string
+          422:
+            description: Bad Request
+            schema:
+              $ref: "#/definitions/BadRequest"
+
+    /usuarios:
+      get:
+        description: |
+          Retorna una lista paginada de los `usuarios` registrados.
+        parameters:
+          - name: cedula
+            required: true
+            type: string
+            format: string
+            in: formData
+            description: Cédula de ciudadanía de la persona
+          - name: nombre_usuario
+            required: true
+            type: string
+            format: string
+            in: formData
+            description: nombre de usuario 
+          - name: correo_electronico
+            required: true
+            in: formData
+            type: string
+            format: email
+            description: correo de la persona
+          - name: nombre
+            in: formData
+            type: string
+            required: true
+            description: nombre de la persona
+          - name: apellido
+            in: formData
+            type: string
+            required: true
+            description: apellido de la persona
+          - name: password
+            in: formData
+            required: true
+            type: string
+            format: password
+            description: contraseña de la persona
+          - name: telefono
+            in: formData
+            required: true
+            type: string
+            format: phone
+            description: numero de teléfono de la persona
+          - name: fecha_inscripcion
+            in: formData
+            required: true
+            type: date
+            description: fecha de registro en el sistema
+          - name: codigo_tipo_usuario
+            in: formData
+            required: true
+            type: integer
+            description: codigo del tipo de usuario
+        responses:
+          200:
+            description: OK
+            schema:
+              type: object
+              properties:
+                meta:
+                  type: object
+                  properties:
+                    pagination:
+                      type: object
+                      properties:
+                        total:
+                          type: number
+                          format: integer
+                          description: Cantidad total de registros en la base de datos
+                        count:
+                          type: number
+                          format: integer
+                          description: Cantidad registros en la página
+                        per_page:
+                          type: number
+                          format: integer
+                          description: Cantidad registros por página
+                        current_page:
+                          type: number
+                          format: integer
+                          description: Página actual
+                        total_pages:
+                          type: number
+                          format: integer
+                          description: Cantidad total de páginas
+                        links:
+                          type: object
+                          properties:
+                            next:
+                              type: string
+                              description: URL de la página siguiente
+                            previous:
+                              type: string
+                              description: URL de la página anterior
+                data:
+                  type: array
+                  items:
+                    $ref: '#/definitions/VisitaPaginate'
+          422:
+            description: Bad Request
+            schema:
+              $ref: "#/definitions/BadRequest"
+              
+    /forgot_password:
+      post:
+        description: |
+          El API enviará un email a la persona con la información pertinente para 
+          recuperar la contraseña
+        parameters:
+          - name: correo_electronico
+            in: formData
+            required: true
+            type: string
+            format: email
+            description: email de la persona
+        responses:
+          200:
+            description: OK
+            schema:
+              type: object
+              properties:
+                ok:
+                  type: string
+          422:
+            description: Bad Request
+            schema:
+              $ref: "#/definitions/BadRequest"
+  definitions:
+    LoginResponse:
+      title: ' '
+      type: object
+      properties:
+        token:
+          type: string
+
+    BadRequest:
+      title: ' '
+      type: object
+      properties:
+          errors:
+            type: array
+            items:
+              description: Errores ocurridos
+
+    VisitaPaginate:
+      title: ' '
+      type: object
+      properties:
+        codigo:
+          type: integer
+          description: codigo de la visita
+        codigo_siembra:
+          type: integer
+          description: codigo de la siembra
+        fecha:
+          type: string
+          description: tipo de proyecto
+        id_agronomo:
+          type: string
+          format: string
+          description: cedula del agronomo
+        vereda:
+          type: string
+          format: string
+          description: vereda de ubicacion
+        punto_referencia:
+          type: string
+          format: string
+          description: punto de referencia de la siembra
+        zona:
+          type: string
+          format: string
+          description: nombre de la zona
+        municipio:
+          type: string
+          format: string
+          description: nombre del municipio
+        agronomo:
+          type: array
+           items:
+           $ref: agronomo
+            data:
+            cedula:
+              type: string
+              format: string
+              description: cédula del agronomo
+            correo_electronico:
+              type: string
+              format: string
+              description: correo electronico del agronomo
+            nombre:
+              type: string
+              format: string
+              description: Nombre del agronomo
+            apellido: 
+              type: string
+              format: string
+              description: Apellido del agronomo
+            telefono:
+              type: string
+              format: string
+              description: telefono del agronomo
+
+
+  securityDefinitions:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header        
