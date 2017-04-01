@@ -270,7 +270,7 @@ CREATE TABLE `lotes` (
   `vereda` varchar(50) NOT NULL COMMENT 'vereda de ubicacion',
   `codigo_zona` int(11) NOT NULL COMMENT 'clave fornea con tabla zona. indica la zona  a la que pertenece',
   `area` decimal(10,0) NOT NULL COMMENT 'metros cuadrados que posee el lote',
-  `propietario` varchar(50) NOT NULL COMMENT 'clave foranea tabla usuarios para saber de quue agricultor es el lote',
+  `propietario` varchar(50) NOT NULL COMMENT 'clave foranea tabla usuarios para saber de que agricultor es el lote',
   `tenencia` enum('propio','arriendo','vencimiento') NOT NULL COMMENT 'indicador: propio,arriendo, vencimiento',
   `analisis_suelo` binary(1) NOT NULL COMMENT '1:Si, 0:No',
   `fecha_analisis_suelo` datetime DEFAULT NULL COMMENT 'cuando se realizo el analisis de suelo',

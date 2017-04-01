@@ -1,0 +1,117 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Visitas",
+		"_postman_id": "ee9a9b5c-c620-d644-9aae-1d17989f96ba",
+		"description": "Métodos para listar siembras y listar visitas por agronomo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Listado siembras",
+			"description": "Listado de siembras las cuales el agronomo puede visitar",
+			"item": [
+				{
+					"name": "Listado de siembras",
+					"request": {
+						"url": "http://127.0.0.1:8000/api/visita?tipo=rango&fecha_inicio=2017-02-01&fecha_final=2017-03-31",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMTQxNzIwMSIsImlzcyI6Imh0dHA6XC9cLzEyNy4wLjAuMTo4MDAwXC9hcGlcL2xvZ2luIiwiaWF0IjoxNDkwMzE5Mzg5LCJleHAiOjE0OTAzMjI5ODksIm5iZiI6MTQ5MDMxOTM4OSwianRpIjoiNDFhZmY5MWZhODhhNGM5NmM3YzQ0NWE0ZjM4NTgyZDYifQ.88LbDw0NUyHqexuFrLIS9dR_4IEFWwfVgPm1Ft5Qi5U",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"codigo\": \"2\",\n    \"descripcion\":\"prueba\"\n}"
+						},
+						"description": "Tipo: puede ser dia o rango\ndia:fecha especifica\nrango:dos fechas entre las cuales el API va buscar las siembras."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Programar Visita GET",
+			"request": {
+				"url": "http://127.0.0.1:8000/api/programar-visita?zona=Norte de Santander",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMTQxNzIwMSIsImlzcyI6Imh0dHA6XC9cLzEyNy4wLjAuMTo4MDAwXC9hcGlcL2xvZ2luIiwiaWF0IjoxNDg5NzcwODkzLCJleHAiOjE0ODk3NzQ0OTMsIm5iZiI6MTQ4OTc3MDg5MywianRpIjoiZjE3MDBjMDFjNmVkMTZjYTFiMzY0YmViZDg3OTQ5ZDMifQ.YNPntCOm7GOkj0yo1C4JBMejZ10cXxGls66D5pOKZdg",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"codigo\": \"2\",\n    \"descripcion\":\"prueba\"\n}"
+				},
+				"description": "Obtener las siembras dado los siguientes parametros de busqueda: municipio, zona, vereda y propietario."
+			},
+			"response": []
+		},
+		{
+			"name": "Listado de visitas",
+			"request": {
+				"url": "http://127.0.0.1:8000/api/visita?tipo=dia&dia=2017-03-18",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMTQxNzIwMSIsImlzcyI6Imh0dHA6XC9cLzEyNy4wLjAuMTo4MDAwXC9hcGlcL2xvZ2luIiwiaWF0IjoxNDkwMzE5Mzg5LCJleHAiOjE0OTAzMjI5ODksIm5iZiI6MTQ5MDMxOTM4OSwianRpIjoiNDFhZmY5MWZhODhhNGM5NmM3YzQ0NWE0ZjM4NTgyZDYifQ.88LbDw0NUyHqexuFrLIS9dR_4IEFWwfVgPm1Ft5Qi5U",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"codigo\": \"2\",\n    \"descripcion\":\"prueba\"\n}"
+				},
+				"description": "Tipo: puede ser dia o rango,\ndia:fecha especifica\n,rango:dos fechas entre las cuales el API va buscar las siembras."
+			},
+			"response": []
+		},
+		{
+			"name": "Programar Visita POST",
+			"request": {
+				"url": "http://127.0.0.1:8000/api/programar-visita",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMTQxNzIwMSIsImlzcyI6Imh0dHA6XC9cLzEyNy4wLjAuMTo4MDAwXC9hcGlcL2xvZ2luIiwiaWF0IjoxNDkwMDI4MzExLCJleHAiOjE0OTAwMzE5MTEsIm5iZiI6MTQ5MDAyODMxMSwianRpIjoiYWEyMGM4NDVhMjg5YjNjYzMzOWM2YzJkM2NlZjllNGUifQ.qLf3V0Bht_LtJTD8FEmXDTX5DuE5qwyemRAmazLjdIs",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fecha\": \"2017-03-18\",\n    \"codigo_siembra\":\"2\",\n    \"agronomo\":\"21417201\"\n}"
+				},
+				"description": "Programar la visita, enviando por parametros la fecha, codigo_siembra, y la cedula del agronomo."
+			},
+			"response": []
+		}
+	]
+}

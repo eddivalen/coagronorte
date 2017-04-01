@@ -9,6 +9,7 @@ use App\Http\Requests\CreateUsuarioRequest;
 use App\Http\Requests\UpdateUsuarioRequest;
 use App\Http\Requests\ForgotPasswordRequest;
 use App\Http\Requests\ConfirmacionRequest;
+use App\Http\Transformers\UsuarioTransformer;
 use App\Usuario;
 
 use App\Jobs\EnviarConfirmacionDeCuenta;
@@ -26,7 +27,7 @@ class UsuarioController extends Controller
     public function index()
     {
         $usuarios = Usuario::paginate(10);
-        return response()->json(['usuarios'=>$usuarios]);
+        return response()->collection($usuarios, new UsuarioTransformer);
     }
 
     /**
@@ -52,7 +53,7 @@ class UsuarioController extends Controller
         // Enviar correo para confirmar cuenta
         $this->dispatch(new EnviarConfirmacionDeCuenta($usuario));
         return response()->json([
-            'ok'=>'Usuario creado, validar correo'
+            'ok'=>'Usuario creado, ahora debe validar su correo'
             ],201);
     }
 
@@ -112,6 +113,4 @@ class UsuarioController extends Controller
         return response()->json(['ok'=>'Eliminado'],200);
     
     }
-  
-    
 }

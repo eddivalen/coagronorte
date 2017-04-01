@@ -26,12 +26,13 @@ class UpdateUsuarioRequest extends FormRequest
         return [
             'cedula'              => 'unique:usuarios,cedula',
             'nombre_usuario'      => 'unique:usuarios,nombre_usuario',
-            'correo_electronico'  => 'email|unique:usuarios,correo_electronico',
             'nombre'              => 'string|max:50',
             'apellido'            => 'string|max:50',
+            'password'            => 'string',
+            'correo_electronico'  => 'email|unique:usuarios,correo_electronico',
             'telefono'            => 'string|max:50',
             'fecha_inscripcion'   => 'date',
-            'codigo_tipo_usuario' => 'unique:tipo_usuarios,codigo_tipo_usuario',
+            'codigo_tipo_usuario' => 'exists:tipo_usuarios,codigo|numeric',
         ];
     }
 }

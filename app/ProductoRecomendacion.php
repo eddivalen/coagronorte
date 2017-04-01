@@ -10,4 +10,8 @@ class ProductoRecomendacion extends Pivot
 	public $timestamps    = false;
 	protected $fillable   = ['codigo_producto','codigo_visita','cantidad','dosis','aplicacion','observaciones','archivo'];
 
+	public function visita(){
+		return $this->belongsTo(Visita::class, 'codigo_visita','codigo');
+	}
+
 }

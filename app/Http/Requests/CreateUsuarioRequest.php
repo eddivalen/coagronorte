@@ -24,13 +24,15 @@ class CreateUsuarioRequest extends FormRequest
     public function rules()
     {
         return [
-            'cedula'             => 'required|unique:usuarios,cedula',
-            'nombre_usuario'     => 'required|unique:usuarios,nombre_usuario',
-            'correo_electronico' => 'required|email|unique:usuarios,correo_electronico',
-            'nombre'             => 'required|string|max:50',
-            'apellido'           => 'required|string|max:50',
-            'telefono'           => 'required|string|max:50',
-            'fecha_inscripcion'  => 'date',
+            'cedula'              => 'required|unique:usuarios,cedula',
+            'nombre_usuario'      => 'required|unique:usuarios,nombre_usuario',
+            'nombre'              => 'required|string|max:50',
+            'apellido'            => 'required|string|max:50',
+            'password'            => 'required|string',
+            'correo_electronico'  => 'required|email|unique:usuarios,correo_electronico',
+            'telefono'            => 'required|string|max:50',
+            'fecha_inscripcion'   => 'required|date',
+            'codigo_tipo_usuario' => 'required|exists:tipo_usuarios,codigo|numeric',
         ];
     }
 }

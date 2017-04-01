@@ -15,11 +15,15 @@ class UsuarioTransformer extends Fractal\TransformerAbstract {
 	 */
 	public function transform(Usuario $usuario) {
 		return [
-			'cedula'             => $usuario->cedula,
-			'correo_electronico' => $usuario->correo_electronico,
-			'nombre'             => $usuario->nombre,
-			'apellido'           => $usuario->apellido,
-			'telefono'           => $usuario->telefono,
+			'cedula'              => $usuario->cedula,
+			'nombre_usuario'      => $usuario->nombre_usuario,
+			'nombre'              => $usuario->nombre,
+			'apellido'            => $usuario->apellido,
+			'correo_electronico'  => $usuario->correo_electronico,
+			'telefono'            => $usuario->telefono,
+			'fecha_inscripcion'   => $usuario->fecha_inscripcion,
+			'codigo_tipo_usuario' => $usuario->codigo_tipo_usuario,
+			'confirmacion'        => $usuario->confimarcion
 		];
 	}
 }
