@@ -237,8 +237,8 @@ return [
         'JWTAuth'      => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory'   => Tymon\JWTAuth\Facades\JWTFactory::class,
         'Uuid'         => Ramsey\Uuid\Uuid::class,
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
-        'Fractal' => Spatie\Fractal\FractalFacade::class,
+        'Debugbar'     => Barryvdh\Debugbar\Facade::class,
+        'Fractal'      => Spatie\Fractal\FractalFacade::class,
     ],
 
 ];
